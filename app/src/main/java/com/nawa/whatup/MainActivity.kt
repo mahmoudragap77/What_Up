@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import com.nawa.whatup.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,9 +31,15 @@ class MainActivity : AppCompatActivity() {
 
         loadNews()
 
+
     }
 
-    private fun loadNews(){
+    private fun showNews(articles: ArrayList<Articles>) {
+        val adapter = NewsAdapter(this, articles)
+        binding.newsList.adapter = adapter
+    }
+
+    private fun loadNews() {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://newsapi.org")
             .addConverterFactory(GsonConverterFactory.create())
@@ -40,22 +47,27 @@ class MainActivity : AppCompatActivity() {
 
         val c = retrofit.create(NewsCallable::class.java)
 
-        c.getNews().enqueue(object : Callback<News>{
+        c.getNews().enqueue(object : Callback<News> {
             override fun onResponse(
                 call: Call<News?>,
                 response: Response<News?>
             ) {
 
                 val news = response.body()
-                val article = news?.articles
-                Log.d("trace", " Article $article ")
+                val article = news?.articles!!
+//                Log.d("trace", " Article $article ")
+                showNews(article)
+
+                binding.progress.isVisible = false
+
             }
 
             override fun onFailure(
                 call: Call<News?>,
                 t: Throwable
             ) {
-                Log.d("body" , t.message.toString())
+//                Log.d("body" , t.message.toString())
+                binding.progress.isVisible = false
             }
 
         })
