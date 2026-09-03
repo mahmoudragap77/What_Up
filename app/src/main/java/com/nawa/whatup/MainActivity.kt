@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         loadNews()
 
+        binding.refresh.setOnRefreshListener { loadNews() }
 
     }
 
@@ -56,9 +57,11 @@ class MainActivity : AppCompatActivity() {
                 val news = response.body()
                 val article = news?.articles!!
 //                Log.d("trace", " Article $article ")
+                article.removeAll{it.title == "[Removed]"}
                 showNews(article)
 
                 binding.progress.isVisible = false
+                binding.refresh.isRefreshing = false
 
             }
 

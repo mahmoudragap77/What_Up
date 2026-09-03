@@ -11,9 +11,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.nawa.whatup.databinding.ArticleListItemBinding
 
-class NewsAdapter(val activity: Activity, val articles: ArrayList<Articles>) :
+class NewsAdapter(private val activity: Activity, private val articles: ArrayList<Articles>) :
     RecyclerView.Adapter<NewsAdapter.NewsVH>() {
-    class NewsVH(val binding: ArticleListItemBinding) : RecyclerView.ViewHolder(binding.root) {}
+    class NewsVH(val binding: ArticleListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 
     override fun onCreateViewHolder(
@@ -43,21 +43,16 @@ class NewsAdapter(val activity: Activity, val articles: ArrayList<Articles>) :
 
             val url = articles[position].url
             containeCv.setOnClickListener {
-
                 val intent = Intent(Intent.ACTION_VIEW, url.toUri())
-
                 activity.startActivity(intent)
+            }
 
-                shareFab.setOnClickListener {
-                    ShareCompat
-                        .IntentBuilder(activity)
-                        .setType("text/plain")
-                        .setChooserTitle("Share Article With:")
-                        .setText(url)
-                        .startChooser()
-
-                }
-
+            shareFab.setOnClickListener {
+                ShareCompat.IntentBuilder(activity)
+                    .setType("text/plain")
+                    .setChooserTitle("Share Article With:")
+                    .setText(url)
+                    .startChooser()
             }
         }
     }

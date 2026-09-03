@@ -30,6 +30,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
+            android:maxLength="28"
             android:id="@+id/article_text"
             style="@style/TVStyle"
             android:layout_width="wrap_content"
@@ -39,6 +40,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/shadow_v"
             tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..."
+            style="@style/TVStyle"
+            app:layout_constraintStart_toEndOf="@+id/article_text"
+            app:layout_constraintTop_toTopOf="@+id/article_text"
+            app:layout_constraintBaseline_toBaselineOf="@+id/article_text"
+            android:layout_marginStart="4dp"
+            />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/share_fab"

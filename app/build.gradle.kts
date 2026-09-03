@@ -51,4 +51,5 @@ dependencies {
 
     //glide
     implementation("com.github.bumptech.glide:glide:5.0.9")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0")
 }
