@@ -1,3 +1,10 @@
+
+
+https://github.com/user-attachments/assets/6e8a73d3-e866-4968-8f42-3325dcecd9bd
+
+
+
+
 # What Up 📰
 
 **What Up** is a simple Android news application that lets users browse the latest general news headlines in one place.
